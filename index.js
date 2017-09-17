@@ -11,17 +11,17 @@ client.on('ready', () => {
 client.on('message', message => {
 	if(message.content === "raid")
 	{
-		message.channel.send("Sorry, I have no idea when the raid is...");
+		message.reply("Sorry, I have no idea when the raid is...");
 	}
 
 	if(message.content === "ping")
 	{
-		message.channel.send("You are on the **" + message.channel.guild.name + "** server");
+		message.reply("You are on the **" + message.channel.guild.name + "** server");
 	}
 
 	if (message.content === '`help')
 	{
-		 message.channel.send("The List of the Commands!")
+		 message.reply("The List of the Commands!")
 		}
 });
 
