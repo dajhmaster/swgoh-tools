@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
+  "name": "swgoh-tools",
+  "version": "1.0.0",
+  "description": "Star Wars: Galaxy of Heroes - Tools",
   "engines": {
     "node": "6.11.1"
   },
@@ -11,6 +11,7 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "discord.js": "9.3.1",
     "ejs": "2.5.6",
     "express": "4.15.2"
   },
@@ -20,10 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/dajhmaster/swgoh-tools"
   },
   "keywords": [
     "node",
+    "swgoh",
     "heroku",
     "express"
   ],
