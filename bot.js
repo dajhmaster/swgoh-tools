@@ -37,3 +37,9 @@ client.on('message', message => {
 
 
 client.login(process.env.BOT_TOKEN);
+
+
+// pings server every 15 minutes to prevent dynos from sleeping
+setInterval(() => {
+ http.get('http://swgoh-tools.herokuapp.com');
+}, 900000);
