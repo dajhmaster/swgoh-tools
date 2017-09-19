@@ -18,3 +18,8 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+// pings server every 15 minutes to prevent dynos from sleeping
+setInterval(() => {
+ http.get('http://swgoh-tools.herokuapp.com');
+}, 900000);
