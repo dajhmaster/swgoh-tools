@@ -14,7 +14,7 @@ client.on('message', message => {
 	
 	var args = message.content.substring(PREFIX.length).split(" ");
 	
-	switch (args[0]) {
+	switch (args[0].toLowerCase()) {
 		case "ping":
 			message.channel.sendMessage("You are on the **" + message.channel.guild.name + "** server");
 			break;
@@ -28,8 +28,24 @@ client.on('message', message => {
 			break;
 		
 		case "send":
+			message.channel.sendMessage("You just sent to me the following: " + args[1]);
+			break;
+		
+		case "repeat":
 			message.channel.sendMessage("Still working on that. Give me some time.");
 			break;
+		
+		case "embed":
+			var embed = new Discord.RichEmbed();
+				.setDescription("This is a rich embed");
+				.addField("Field Name", "Field Text", true);
+				.setFooter("Embed Footer");
+			message.channel.sendEmbed(embed);
+			break;
+			
+		default:
+			message.reply("**Invalid Command!**");
+			message.channel.sendMessage(message.author.toString() + " Sorry, that is not a valid command");
 	}
 
 });
