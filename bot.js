@@ -35,16 +35,16 @@ client.on('message', message => {
 			message.channel.sendMessage("Still working on that. Give me some time.");
 			break;
 		
-		case "embed":
-			var embed = new Discord.RichEmbed()
-				.setDescription("This is a rich embed")
-				.addField("Field Name", "Field Text", true)
-				.setFooter("Embed Footer")
-			message.channel.sendEmbed(embed);
-			break;
+		//case "embed":
+		//	var embed = new Discord.RichEmbed()
+		//		.setDescription("This is a rich embed")
+		//		.addField("Field Name", "Field Text", true)
+		//		.setFooter("Embed Footer")
+		//	message.channel.sendEmbed(embed);
+		//	break;
 			
 		default:
-			message.reply("**Invalid Command!**");
+			// message.reply("**Invalid Command!**");
 			message.channel.sendMessage(message.author.toString() + " Sorry, that is not a valid command");
 	}
 
