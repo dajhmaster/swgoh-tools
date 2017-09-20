@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
+const PREFIX = "+";
 
 client.on('ready', () => {
 	console.log("Boot Online and Ready! On " + client.guilds.size + " Servers!");
@@ -9,20 +10,24 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-	if(message.content === "raid")
-	{
-		message.reply("Sorry, I have no idea when the raid is...");
+	if (!message.content.startsWith(PREFIX)) return;
+	
+	var args = message.content.substring(PREFIX.length).split(" ");
+	
+	switch (args[0]) {
+		case "ping":
+			message.reply("You are on the **" + message.channel.guild.name + "** server");
+			break;
+		
+		case "raid":
+			message.reply("Sorry, I have no idea when the raid is...");
+			break;
+			
+		case "help":
+			message.reply("The List of the Commands!");
+			break;
 	}
 
-	if(message.content === "ping")
-	{
-		message.reply("You are on the **" + message.channel.guild.name + "** server");
-	}
-
-	if (message.content === '`help')
-	{
-		 message.reply("The List of the Commands!")
-		}
 });
 
 //\nPing Get your Ping... not\ngetme Invite me!\nversion I have a version?!?!
