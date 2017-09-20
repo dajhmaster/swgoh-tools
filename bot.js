@@ -24,7 +24,11 @@ client.on('message', message => {
 			break;
 			
 		case "help":
-			message.channel.sendMessage("The List of the Commands!");
+			message.channel.sendMessage("Still updating\n\nI will let you know when I have something more.");
+			break;
+		
+		case "send":
+			message.channel.sendMessage("Still working on that. Give me some time.");
 			break;
 	}
 
