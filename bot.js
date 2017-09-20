@@ -36,10 +36,10 @@ client.on('message', message => {
 			break;
 		
 		case "embed":
-			var embed = new Discord.RichEmbed();
-				.setDescription("This is a rich embed");
-				.addField("Field Name", "Field Text", true);
-				.setFooter("Embed Footer");
+			var embed = new Discord.RichEmbed()
+				.setDescription("This is a rich embed")
+				.addField("Field Name", "Field Text", true)
+				.setFooter("Embed Footer")
 			message.channel.sendEmbed(embed);
 			break;
 			
