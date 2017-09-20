@@ -1,6 +1,6 @@
 {
   "name": "swgoh-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Star Wars: Galaxy of Heroes - Tools",
   "engines": {
     "node": "6.11.1"
