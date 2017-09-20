@@ -16,15 +16,15 @@ client.on('message', message => {
 	
 	switch (args[0]) {
 		case "ping":
-			message.reply("You are on the **" + message.channel.guild.name + "** server");
+			message.channel.sendMessage("You are on the **" + message.channel.guild.name + "** server");
 			break;
 		
 		case "raid":
-			message.reply("Sorry, I have no idea when the raid is...");
+			message.channel.sendMessage("Sorry, I have no idea when the raid is...");
 			break;
 			
 		case "help":
-			message.reply("The List of the Commands!");
+			message.channel.sendMessage("The List of the Commands!");
 			break;
 	}
 
