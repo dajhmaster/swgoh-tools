@@ -16,32 +16,40 @@ client.on('message', message => {
 	
 	switch (args[0].toLowerCase()) {
 		case "ping":
-			message.channel.sendMessage("You are on the **" + message.channel.guild.name + "** server");
+			message.channel.send("You are on the **" + message.channel.guild.name + "** server");
 			break;
-		
+
 		case "raid":
-			message.channel.sendMessage("Sorry, I have no idea when the raid is...");
+			message.channel.send("Sorry, I have no idea when the raid is...");
 			break;
-			
+
 		case "help":
-			message.channel.sendMessage("Still updating\n\nI will let you know when I have something more.");
+			message.channel.send("Still updating\n\nI will let you know when I have something more.");
 			break;
-		
+
 		case "send":
-			message.channel.sendMessage("You just sent to me the following: " + args[1]);
+			message.channel.send("You just sent to me the following: " + args[1]);
 			break;
-		
+
 		case "repeat":
-			message.channel.sendMessage("Still working on that. Give me some time.");
+			message.channel.sende("Still working on that. Give me some time.");
 			break;
-		
-		//case "embed":
-		//	var embed = new Discord.RichEmbed()
-		//		.setDescription("This is a rich embed")
-		//		.addField("Field Name", "Field Text", true)
-		//		.setFooter("Embed Footer")
-		//	message.channel.sendEmbed(embed);
-		//	break;
+
+		case "avatar":
+			//message.channel.send("Still working on that. Give me some time.");
+			message.channel.send(message.author.avatarURL);
+			break;
+
+		case "info":
+			var embed = new Discord.RichEmbed()
+				//.setDescription("This is a rich embed")
+				.setAuthor(message.author.username, message.author.avatarURL, null)
+				.addField("Username Creation Date", message.author.createdAt.toString(), true)
+				.setFooter("User Information")
+				.setThumbnail(message.author.avatarURL)
+				.setColor(0x00AA00)
+			message.channel.send(embed);
+			break;
 			
 		default:
 			// message.reply("**Invalid Command!**");
