@@ -28,12 +28,21 @@ client.on('message', message => {
 			break;
 
 		case "send":
-			message.channel.send("You just sent to me the following: " + args[1]);
+			message.author.send("You just sent a message to: **" + args[1] + "**");
+			message.channel.send("I just sent you a DM" + message.author.toString());
 			break;
 
 		case "repeat":
-			message.channel.sende("Still working on that. Give me some time.");
+			message.channel.send("Still working on that. Give me some time.\nYou sent the string: **\`" + message.author.id.toString() + "\`**");
 			break;
+			let str = message.author; //Just assuming some random tag.
+			//removing any sign of < @ ! >...
+			//the exclamation symbol comes if the user has a nickname on the server.
+			let id = str.replace(/[<@!>]/g, '');
+
+			client.fetchUser(id)
+			.then(user => {user.send("Hello I dmed you!")})
+
 
 		case "avatar":
 			//message.channel.send("Still working on that. Give me some time.");
@@ -42,10 +51,12 @@ client.on('message', message => {
 
 		case "info":
 			var embed = new Discord.RichEmbed()
-				//.setDescription("This is a rich embed")
-				.setAuthor(message.author.username, message.author.avatarURL, null)
+				//.setDescription(message.author)
+				//.setAuthor(message.author, message.author.avatarURL, null)
 				.addField("Username Creation Date", message.author.createdAt.toString(), true)
-				.setFooter("User Information")
+				.addField("author", message.author, true)
+				.addField("username", message.author.username, true)
+				.setFooter(message.author.username + " | " + message.author.id.toString())
 				.setThumbnail(message.author.avatarURL)
 				.setColor(0x00AA00)
 			message.channel.send(embed);
