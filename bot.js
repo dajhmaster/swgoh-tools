@@ -28,8 +28,11 @@ client.on('message', message => {
 			break;
 
 		case "send":
-			message.author.send("You just sent a message to: **" + args[1] + "**");
-			message.channel.send("I just sent you a DM" + message.author.toString());
+			message.channel.send("You just sent a message to: **" + args[1] + "**");
+			message.author.send("I just sent you a DM " + message.author.toString());
+			let memberID = args[1];
+			client.fetchUser(memberID)
+			    .then(user => {user.send("Hello I dmed you!")});
 			break;
 
 		case "repeat":
