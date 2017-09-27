@@ -11,10 +11,13 @@ client.on('ready', () => {
 
 client.on('message', message => {
 	if (!message.content.startsWith(PREFIX)) return;
+
+	//var args = message.content.substring(PREFIX.length).split(" ");
+	var args = message.content.slice(PREFIX.length).trim().split(/ +/g);
+	var command = args.shift().toLowerCase();
+	var memberID = "";
 	
-	var args = message.content.substring(PREFIX.length).split(" ");
-	
-	switch (args[0].toLowerCase()) {
+	switch (command) {
 		case "ping":
 			message.channel.send("You are on the **" + message.channel.guild.name + "** server");
 			break;
@@ -24,28 +27,46 @@ client.on('message', message => {
 			break;
 
 		case "help":
-			message.channel.send("Still updating\n\nI will let you know when I have something more.");
+			message.channel.send("Commands:\`\`\`\n " + 
+				"+send: Send message to user ID \n " +
+				"+repeat: Send message to user ID and return Embed \n " +
+				"+raid: Nothing yet \n " +
+				"+ping: Returns server name\`\`\`");
 			break;
 
 		case "send":
-			message.channel.send("You just sent a message to: **" + args[1] + "**");
-			message.author.send("I just sent you a DM " + message.author.toString());
-			let memberID = args[1];
+			memberID = args.shift().toLowerCase();
+			if (memberID.length < 18) {
+				message.reply("Sorry, you entered an invalid user ID");
+				console.log("memberID length: " + memberID.length);
+				break;
+			}
 			client.fetchUser(memberID)
-			    .then(user => {user.send("Hello I dmed you!")});
+			    .then(user => {
+			    	user.send(args.join(" "))
+			    	message.chanel.send("You just sent a message to: **" + user.username + "**")
+			    });
 			break;
 
 		case "repeat":
-			message.channel.send("Still working on that. Give me some time.\nYou sent the string: **\`" + message.author.id.toString() + "\`**");
+			memberID = args.shift().toLowerCase();
+			//message.channel.send("You sent the string: <@!" + memberID + "> **\`" + args.join(" ") + "\`**");
+			client.fetchUser(memberID)
+			    .then(user => {
+			    	//message.channel.send("You sent the string  **\`" + args.join(" ") + "\`** to " + user.username)
+			    	//user.send(args.join(" "))
+			    	console.log("Message sent to " + user.username + " from " + message.author.username)
+
+			    	var embed = new Discord.RichEmbed()
+			    		.setDescription("**Direct Message sent to: **" + user.username + "\n**Message: **\`" + args.join(" ") + "\`")
+			    		.setAuthor(user.username, user.avatarURL, null)
+			    		//.addField("Message sent to: " + user.username, "Message: " + args.join(" "), true)
+			    		.setFooter("To: " + user.username + " | From: " + message.author.username)
+			    		.setColor(0x00AA00)
+			    	message.channel.send(embed);
+			    	user.send(embed);
+			    });
 			break;
-			let str = message.author; //Just assuming some random tag.
-			//removing any sign of < @ ! >...
-			//the exclamation symbol comes if the user has a nickname on the server.
-			let id = str.replace(/[<@!>]/g, '');
-
-			client.fetchUser(id)
-			.then(user => {user.send("Hello I dmed you!")})
-
 
 		case "avatar":
 			//message.channel.send("Still working on that. Give me some time.");
@@ -67,24 +88,12 @@ client.on('message', message => {
 			
 		default:
 			// message.reply("**Invalid Command!**");
-			message.channel.sendMessage(message.author.toString() + " Sorry, that is not a valid command");
+			message.channel.sendMessage("Sorry, that is not a valid command " + message.author.toString());
 	}
 
 });
 
-//\nPing Get your Ping... not\ngetme Invite me!\nversion I have a version?!?!
-//					\nservers I am on servers!
-//					\nlounge Come on my Lounge!
-//					\nserverinfo Get the Info of your Server!
-//					\navatar Get your Avatar!
-//					\nroles Get the roles of this server!
-//					\n
-//					\n
-//					\nSay Say Wiggle, fliping table or RIP
-
-
 client.login(process.env.BOT_TOKEN);
-
 
 // pings server every 15 minutes to prevent dynos from sleeping
 setInterval(() => {
