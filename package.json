@@ -13,7 +13,7 @@
   "dependencies": {
     "discord.js": "^11.2.1",
     "ejs": "2.5.6",
-    "express": "4.15.2"
+    "express": "4.16.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
