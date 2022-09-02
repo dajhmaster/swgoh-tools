@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Star Wars: Galaxy of Heroes - Tools",
   "engines": {
-    "node": "6.11.3"
+    "node": "12.22.12"
   },
   "main": "index.js",
   "scripts": {
